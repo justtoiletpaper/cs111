@@ -11,7 +11,7 @@ while counter >= 0:
     counter -= 1
 print(reverse)
 reverse_skipped = ""
-for i in range(0, (len(reverse)), 2):
+for i in range(0, (len(reverse)cd), 2):
     letter = reverse[i]
     reverse_skipped += letter
 print(reverse_skipped)
