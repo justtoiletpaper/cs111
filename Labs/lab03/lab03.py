@@ -2,9 +2,18 @@ def even_weighted(s):
     """
     >>> x = [1, 2, 3, 4, 5, 6]
     >>> even_weighted(x)
-    [0, 6, 2]"""
+    [0, 6, 20]"""
     "*** YOUR CODE HERE ***"
-    return [s.index(i)*i for i in s if s.index(i) % 2 == 0]
+    even = s[::2]
+    multiplier = 0
+    counter = 1
+    while counter <= len(even):
+        even[counter - 1] = even[counter - 1] * multiplier
+        multiplier += 2
+        counter += 1
+    return even
+
+
 
 
 def couple(s, t):
@@ -61,7 +70,12 @@ def copy_file(input_filename, output_filename):
     "*** YOUR CODE HERE ***"
     with open(input_filename) as input_file, open(output_filename, "w") as output_file:
         content = input_file.readlines()
-        output_file.writelines(content)
+        length = len(content)
+        counter = 1
+        while counter <= length:
+            output_file.write(str(counter) + ": " + content[counter - 1])
+            counter += 1
+
 
 
 ########################################################
