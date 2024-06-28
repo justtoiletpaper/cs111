@@ -17,7 +17,7 @@ data_lines = myFile.readlines()     # The file reads all the file as a list of s
 
 oneline = myFile.readline()     # The file reads a single line
 
-myFile.write(line)
+myFile.writeline()
 
 myFile.writelines()
 
