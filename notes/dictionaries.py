@@ -51,4 +51,14 @@ for name in insects:
 # {key: value for <name> in <iter exp>}
 {x: x*x for x in range(3, 6)}   # {3: 9, 4: 16, 5: 25}
 
-#
+# Going through each key in a dictionary
+for somekey in insects:
+    <SOMECODE>
+
+# Checking for a code:
+my_dictionary = {1: 1, 2: 4, 3: 9}
+key = "a"
+if key in my_dictionary:
+    value = my_dictionary[key]
+else:
+    value = 0
