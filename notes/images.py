@@ -23,6 +23,11 @@ for pixel in image:
     pixel.blue = 0
 image.show()
 
+# Also can be done in one function:
+for pixel in image:
+    pixel.color = (0, 0, pixel.blue)        # = (pixel.red, pixel.green, pixel.blue)
+image.show()
+
 # Images created by the byuimage library are just objects like anything else, and can be passed to
 # and returned from functions:
 def darken(image):
