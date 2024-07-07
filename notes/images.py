@@ -64,5 +64,22 @@ def copy(image):
     return new_image
 
 
+"""Green Screening "chroma key compositing)"""
+
+# How do we determine what is "green"?
+# We can check the pixel's G value see if it is above some threshold.
+def detect_green(pixel):
+        threshold = 100
+        if pixel.green > threshold:
+            return True
+        else:
+            return False
+    # ....... Doesn't work to well: white has a green value of 255 (255, 255, 255)
+
+
+
+
+
+
 
 
