@@ -1,0 +1,11 @@
+{
+    "tests": [
+        {
+            "score": 6,
+            "max_score": 6,
+            "name": "test_lab07.py::test_library_read_and_read_author",
+            "output": "No book with this id\n\n",
+            "visibility": "visible"
+        }
+    ]
+}
