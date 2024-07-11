@@ -3,15 +3,45 @@ from operator import add, mul
 # Write your code here for Q1
 
 
+def product(n):
+    if isinstance(n, int) == True and n > 0:
+        prod = n
+        while n > 1:
+            n = n - 1
+            prod = prod * n
+        return prod
+    elif isinstance(n, int) == False:
+        raise ValueError('n must be an integer')
+    else:
+        raise ValueError('n must be a positive number')
+
+
+def summation(n):
+    if isinstance(n, int) == True and n > 0:
+        sum = n
+        while n > 1:
+            n = n - 1
+            sum = sum + n
+        return sum
+    elif n == 0:
+        return 0
+    else:
+        raise ValueError('n must be a positive integer')
+
 
 
 
 #############################################
 # Q2
 
-square = lambda x: x + x
+def square(x):
+    return x * x
 
-sqrt = lambda x: x ** 0.5 # x^0.5 == √x
+def sqrt(x):
+    if x >= 0:
+        return x ** 0.5
+    else:
+        raise ValueError('x must be positive')
 
 def mean(numbers):
     assert isinstance(numbers, list), "Must be list"
@@ -21,7 +51,7 @@ def mean(numbers):
     for num in numbers:
         total += num
 
-    return total // len(numbers)
+    return total / len(numbers)
 
 
 def median(numbers):
@@ -31,8 +61,8 @@ def median(numbers):
     numbers = sorted(numbers) 
     # `sorted` returns a sorted list. `sorted` works. 
     if len(numbers) % 2 == 0:
-        left_mid = len(numbers) // 2
-        right_mid = left_mid + 1
+        left_mid = numbers[len(numbers) // 2 - 1]
+        right_mid = numbers[len(numbers) // 2]
         return mean([left_mid, right_mid])
     else:
         middle = len(numbers) // 2
