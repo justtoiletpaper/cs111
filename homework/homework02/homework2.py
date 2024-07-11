@@ -31,8 +31,8 @@ def make_borders(filename, thickness=30, red=0, green=0, blue=0):
     return new_image
 
 
-# solution = make_borders("landscape.png")
-# solution.show()
+solution = make_borders("landscape.png")
+solution.show()
 
 
 if __name__ == "__main__":
