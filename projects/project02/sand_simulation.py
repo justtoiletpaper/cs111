@@ -3,7 +3,7 @@ code taken from a project at Stanford CS106A
 """
 
 from Grid import Grid
-from Grid_Objects import * # imports all Grid objects
+from Grid_Objects import *  # imports all Grid objects
 
 all_grid_objects = []
 
@@ -23,7 +23,17 @@ def add_object(grid, object_type, x, y):
     :param x: the x coordinate to add the object to
     :param y: the y coordinate to add the object to
     """
-    pass
+    if grid.array[y][x] is None:
+        obj = object_type(grid, x, y)
+        all_grid_objects.append(obj)
+        if isinstance(obj, Sand):
+            grid.array[y][x] = 's'
+        elif isinstance(obj, Rock):
+            grid.array[y][x] = 'r'
+        elif isinstance(obj, Bubble):
+            grid.array[y][x] = 'b'
+
+
 
 
 def remove_object(grid, x, y):
@@ -39,7 +49,11 @@ def remove_object(grid, x, y):
     :param x: the x coordinate to remove the object from
     :param y: the y coordinate to remove the object from
     """
-    pass
+    if grid.array[y][x] is not None:
+        for element in all_grid_objects:
+            if element.x == x and element.y == y:
+                all_grid_objects.remove(element)
+        grid.array[y][x] = None
 
 
 def do_whole_grid():
@@ -55,6 +69,14 @@ def do_whole_grid():
     """
     all_grid_objects.sort(key=lambda particle: (particle.y, particle.x))
     """Write your code here"""
+    for element in all_grid_objects:
+        if isinstance(element, Bubble):
+            element.move()
+    all_grid_objects.reverse()
+    for element in all_grid_objects:
+        if isinstance(element, Sand):
+            element.move()
+    all_grid_objects.reverse()
 
 
 #########################################################
@@ -68,9 +90,9 @@ Don't write any code below here.
 import pygame
 
 # Set up some constants
-HEADER_THICKNESS = 40 # thickness of header menu bar in pixels
-WIDTH, HEIGHT = 500, 500 + HEADER_THICKNESS # 500 x 500 for simulation, 100 pixel header for buttons
-SCALE = 10 # pixels per particle
+HEADER_THICKNESS = 40  # thickness of header menu bar in pixels
+WIDTH, HEIGHT = 500, 500 + HEADER_THICKNESS  # 500 x 500 for simulation, 100 pixel header for buttons
+SCALE = 10  # pixels per particle
 FPS = 60
 INPUT_SAMPLE_RATE = 180
 BIG_ERASE_RADIUS = 5
@@ -87,10 +109,11 @@ B_GRAVITY = None
 B_BRUSH = None
 B_ERASE = None
 
+
 def mainloop(grid, window, clock):
     # Game loop
     running = True
-    updates_per_frame = INPUT_SAMPLE_RATE/FPS
+    updates_per_frame = INPUT_SAMPLE_RATE / FPS
     frame = 0
     do_gravity = True
     brush_mode = 's'
@@ -103,7 +126,7 @@ def mainloop(grid, window, clock):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
-            if event.type == pygame.MOUSEBUTTONDOWN and event.pos[1] < HEADER_THICKNESS: # menu button press
+            if event.type == pygame.MOUSEBUTTONDOWN and event.pos[1] < HEADER_THICKNESS:  # menu button press
                 if 0 < event.pos[0] < 105:
                     do_gravity = not do_gravity
                 elif 105 < event.pos[0] < 265:
@@ -120,10 +143,9 @@ def mainloop(grid, window, clock):
                         erase_mode = 's'
                 update_buttons(do_gravity, brush_mode, erase_mode)
 
-
-        if pygame.mouse.get_pressed()[0]: # Get the state of left click
+        if pygame.mouse.get_pressed()[0]:  # Get the state of left click
             x, y = pygame.mouse.get_pos()
-            if y >= HEADER_THICKNESS: # check for menu bar presses
+            if y >= HEADER_THICKNESS:  # check for menu bar presses
                 x //= SCALE
                 y = (y - HEADER_THICKNESS) // SCALE
                 if grid.in_bounds(x, y):
@@ -140,9 +162,9 @@ def mainloop(grid, window, clock):
                             remove_object(grid, x, y)
                         add_object(grid, Bubble, x, y)
 
-        elif pygame.mouse.get_pressed()[2]: # check right click
+        elif pygame.mouse.get_pressed()[2]:  # check right click
             x, y = pygame.mouse.get_pos()
-            if y >= HEADER_THICKNESS: # check for menu bar presses
+            if y >= HEADER_THICKNESS:  # check for menu bar presses
                 x //= SCALE
                 y = (y - HEADER_THICKNESS) // SCALE
                 if grid.in_bounds(x, y):
@@ -150,7 +172,6 @@ def mainloop(grid, window, clock):
                         remove_object(grid, x, y)
                     elif erase_mode == 'b':
                         big_erase(grid, x, y)
-
 
         if frame == updates_per_frame:
             frame = 0
@@ -163,6 +184,7 @@ def mainloop(grid, window, clock):
 
         # Cap the frame rate
         clock.tick(INPUT_SAMPLE_RATE)
+
 
 def draw_simulation(window, grid):
     # Draw everything
@@ -180,23 +202,24 @@ def draw_simulation(window, grid):
                 else:
                     color = PURPLE
                 pygame.draw.rect(window, color, pygame.Rect(x * SCALE, HEADER_THICKNESS + y * SCALE, SCALE, SCALE))
-    pygame.draw.rect(window, BLACK, pygame.Rect(0, HEADER_THICKNESS, WIDTH, HEIGHT-HEADER_THICKNESS), 1)
+    pygame.draw.rect(window, BLACK, pygame.Rect(0, HEADER_THICKNESS, WIDTH, HEIGHT - HEADER_THICKNESS), 1)
 
 
 def draw_header(window):
-    pygame.draw.rect(window, BLACK, pygame.Rect(0, 0, 105, HEADER_THICKNESS+1), 1)
-    pygame.draw.rect(window, BLACK, pygame.Rect(104, 0, 150, HEADER_THICKNESS+1), 1)
-    pygame.draw.rect(window, BLACK, pygame.Rect(253, 0, 180, HEADER_THICKNESS+1), 1)
+    pygame.draw.rect(window, BLACK, pygame.Rect(0, 0, 105, HEADER_THICKNESS + 1), 1)
+    pygame.draw.rect(window, BLACK, pygame.Rect(104, 0, 150, HEADER_THICKNESS + 1), 1)
+    pygame.draw.rect(window, BLACK, pygame.Rect(253, 0, 180, HEADER_THICKNESS + 1), 1)
     window.blit(B_GRAVITY, (10, 10))
     window.blit(B_BRUSH, (114, 10))
     window.blit(B_ERASE, (263, 10))
 
 
-def big_erase(grid:Grid, x, y):
-    for j in range(-BIG_ERASE_RADIUS, BIG_ERASE_RADIUS+1):
-        for i in range(-BIG_ERASE_RADIUS, BIG_ERASE_RADIUS+1):
+def big_erase(grid: Grid, x, y):
+    for j in range(-BIG_ERASE_RADIUS, BIG_ERASE_RADIUS + 1):
+        for i in range(-BIG_ERASE_RADIUS, BIG_ERASE_RADIUS + 1):
             if grid.in_bounds(x + i, y + j):
                 remove_object(grid, x + i, y + j)
+
 
 def update_buttons(do_gravity, brush_mode, erase_mode):
     global B_GRAVITY, B_BRUSH, B_ERASE
@@ -217,8 +240,10 @@ def update_buttons(do_gravity, brush_mode, erase_mode):
     elif erase_mode == 'b':
         B_ERASE = FONT.render("Right Click: Big Erase", True, BLACK, LIGHT_GRAY)
 
+
 def update_fps_counter(window, fps):
     window.blit(B_ERASE, (263, 10))
+
 
 def main():
     # Initialize Pygame
@@ -240,6 +265,7 @@ def main():
     grid = Grid(WIDTH // SCALE, (HEIGHT - HEADER_THICKNESS) // SCALE)
 
     mainloop(grid, window, clock)
+
 
 if __name__ == "__main__":
     main()
