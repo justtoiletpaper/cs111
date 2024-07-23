@@ -1,0 +1,32 @@
+{
+    "tests": [
+        {
+            "score": 5,
+            "max_score": 5,
+            "name": "test_lab14.py::test_convert_link",
+            "output": "1\n2\n3\n4\nC\nS\n1\n1\n1\n\n",
+            "visibility": "visible"
+        },
+        {
+            "score": 5,
+            "max_score": 5,
+            "name": "test_lab14.py::test_store_digits",
+            "output": "\n",
+            "visibility": "visible"
+        },
+        {
+            "score": 5,
+            "max_score": 5,
+            "name": "test_lab14.py::test_every_other",
+            "output": "1\n1\n2\n3\n4\nLink(4)\nLink(3, Link(4))\n1\n2\n3\n4\n5\n6\n7\nLink(4, Link(5, Link(6, Link(7))))\nLink(3, Link(4, Link(5, Link(6, Link(7)))))\nLink(6, Link(7))\nLink(5, Link(6, Link(7)))\n()\nLink(7)\n\n",
+            "visibility": "visible"
+        },
+        {
+            "score": 5,
+            "max_score": 5,
+            "name": "test_lab14.py::test_deep_map_mut",
+            "output": "\n",
+            "visibility": "visible"
+        }
+    ]
+}
