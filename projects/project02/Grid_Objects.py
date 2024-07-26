@@ -1,5 +1,5 @@
 from Grid import Grid
-from Particle import Particle
+from Particle import Particlegit
 
 
 class Sand(Particle):
