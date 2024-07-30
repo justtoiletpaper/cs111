@@ -53,7 +53,7 @@ def match_time(text):
     >>> match_time("At 2:00 I pinged 127.0.0.1:80.")
     ['2:00']
     """
-    return re.findall(r'((0?[0-9])|(1[0-9])|(2[0-4])):(([0-5][0-9])|(60))[AP]?M?', text)
+    return re.findall(r'\b(?:(?:0?[0-9])|(?:1[0-9])|(?:2[0-4])):(?:(?:[0-5][0-9])|(?:60))[AP]?M?', text)
 
 
 def area_codes(text):
