@@ -1,4 +1,5 @@
 import sys
+"""Defining Functions"""
 
 
 def mergesort(lst1, lst2):  # Sorts two lists into one sorted list (based on int val)
@@ -8,6 +9,11 @@ def mergesort(lst1, lst2):  # Sorts two lists into one sorted list (based on int
             combined.append(lst1[0])
             lst1 = lst1[1:]
         elif lst1[0] > lst2[0]:
+            combined.append(lst2[0])
+            lst2 = lst2[1:]
+        elif lst1[0] == lst2[0]:
+            combined.append(lst1[0])
+            lst1 = lst1[1:]
             combined.append(lst2[0])
             lst2 = lst2[1:]
 
@@ -31,6 +37,9 @@ def sort(lst):
         sorted_ds1 = sort(dataset1)
         sorted_ds2 = sort(dataset2)
     return mergesort(sorted_ds1, sorted_ds2)    # Sorts the two split lists
+
+
+"""Executing code"""
 
 
 dataset = []
