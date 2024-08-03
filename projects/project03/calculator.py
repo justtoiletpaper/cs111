@@ -154,21 +154,22 @@ def eval(syntax_tree):
 
 
 # Interactive Session goes here
-print('Welcome to the CS 111 Calculator Interpreter.')
-# nsert main loop here
-expression = input('calc >> ')
-while expression != 'exit':
-    exp_tokens = tokenize(expression)
-    try:
-        exp_parsed = parse(exp_tokens)
-        value = eval(exp_parsed)
-        print(value)
-    except TypeError:
-        print('TypeError: The expression is not valid.')
-
+def main():
+    print('Welcome to the CS 111 Calculator Interpreter.')
+    # insert main loop here
     expression = input('calc >> ')
+    while expression != 'exit':
+        exp_tokens = tokenize(expression)
+        try:
+            exp_parsed = parse(exp_tokens)
+            value = eval(exp_parsed)
+            print(value)
+        except TypeError:
+            print('TypeError: The expression is not valid.')
 
-print("Goodbye!")
+        expression = input('calc >> ')
+
+    print("Goodbye!")
 
 if __name__ == "__main__":
-    pass
+    main()
