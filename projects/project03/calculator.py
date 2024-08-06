@@ -139,7 +139,7 @@ def apply(operator, operands):
 
 
 def eval(syntax_tree):
-    if isinstance(syntax_tree, int) or isinstance(syntax_tree, float):
+    if isinstance(syntax_tree, (int, float)):
         return syntax_tree
     elif isinstance(syntax_tree, Pair):
         operator = syntax_tree.first
