@@ -1,0 +1,25 @@
+{
+    "tests": [
+        {
+            "score": 0,
+            "max_score": 17,
+            "name": "test_homework7.py::test_request_guard_domain",
+            "output": "https://cs111.byu.edu\nhttps://cs111.byu.edu\n\nRequestGuard = <class 'RequestGuard.RequestGuard'>\n\n    @max_score(17)\n    @with_import('RequestGuard', 'RequestGuard')\n    def test_request_guard_domain(RequestGuard):\n        guard = get_request_guard_domain(RequestGuard)\n        assert guard.can_follow_link('https://cs111.byu.edu/Homework/homework01')\n        assert guard.can_follow_link('https://cs111.byu.edu/Projects/Project4/images/cat.jpg')\n        assert not guard.can_follow_link('https://byu.edu')\n        assert not guard.can_follow_link('https://cs111.byu.edu/images/logo.png')\n        assert not guard.can_follow_link('https://cs111.byu.edu/data/spectra1.txt')\n    \n>       assert RequestGuard('https://cs111.byu.edu').forbidden == ['/Projects/project04/assets/page5.html']\nE       AttributeError: 'RequestGuard' object has no attribute 'forbidden'\n\ntest_homework7.py:35: AttributeError",
+            "visibility": "visible"
+        },
+        {
+            "score": 0,
+            "max_score": 17,
+            "name": "test_homework7.py::test_request_guard_subdomain",
+            "output": "https://cs111.byu.edu\nhttps://cs111.byu.edu\n\nRequestGuard = <class 'RequestGuard.RequestGuard'>\n\n    @max_score(17)\n    @with_import('RequestGuard', 'RequestGuard')\n    def test_request_guard_subdomain(RequestGuard):\n        guard = get_request_guard_subdomain(RequestGuard)\n        assert guard.can_follow_link('https://cs111.byu.edu/Homework/homework01')\n        assert guard.can_follow_link('https://cs111.byu.edu/Projects/Project4/images/cat.jpg')\n        assert not guard.can_follow_link('https://www.wikipedia.org')\n        assert not guard.can_follow_link('https://cs111.byu.edu/images/logo.png')\n        assert not guard.can_follow_link('https://cs111.byu.edu/data/spectra1.txt')\n    \n>       assert RequestGuard('https://cs111.byu.edu/Homework/homework07/').forbidden == ['/Projects/project04/assets/page5.html']\nE       AttributeError: 'RequestGuard' object has no attribute 'forbidden'\n\ntest_homework7.py:48: AttributeError",
+            "visibility": "visible"
+        },
+        {
+            "score": 0,
+            "max_score": 16,
+            "name": "test_homework7.py::test_request_guard_offsite_domain",
+            "output": "https://code.visualstudio.com\nhttps://code.visualstudio.com\n\nRequestGuard = <class 'RequestGuard.RequestGuard'>\n\n    @max_score(16)\n    @with_import('RequestGuard', 'RequestGuard')\n    def test_request_guard_offsite_domain(RequestGuard):\n        guard = get_request_guard_offsite_domain(RequestGuard)\n        assert guard.can_follow_link('https://code.visualstudio.com/Homework/homework01')\n        assert guard.can_follow_link('https://code.visualstudio.com/Projects/Project4/images/cat.jpg')\n        assert not guard.can_follow_link('https://www.jetbrains.com')\n        assert not guard.can_follow_link('https://code.visualstudio.com/images/logo.png')\n        assert not guard.can_follow_link('https://code.visualstudio.com/data/spectra1.txt')\n    \n>       assert RequestGuard('https://code.visualstudio.com/Homework/homework07/').forbidden == ['/raw']\nE       AttributeError: 'RequestGuard' object has no attribute 'forbidden'\n\ntest_homework7.py:61: AttributeError",
+            "visibility": "visible"
+        }
+    ]
+}
